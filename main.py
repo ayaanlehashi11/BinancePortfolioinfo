@@ -1,13 +1,48 @@
-from binance import Client
-from binance import BinanceSocketManager
-from binance import DepthCacheManager
-from binance import ThreadedWebsocketManager , ThreadedDepthCacheManager
+import os.path
+import csv
+import pandas as pd
+from binance.exceptions import BinanceOrderException
+from binance import Client, ThreadedWebsocketManager, ThreadedDepthCacheManager
 
-class Websocket:
+api_key = os.environ['BINANCE_API_KEY_TEST']
+api_secret = os.environ['BINANCE_API_SECRET_TEST']
+client = Client(api_key , api_secret)
+coins  = ["BTC" , "ETH" , "BNB" , "DOG" ,"SOL" , "XRP"]
+keys = []
+values = []
+class Binance_Account:
     def __init__(self):
+        self.account = "ayaanle"
+        self.balance = client.get_asset_balance()
         pass
     # account: should your verified binance accound
     def account_info(self , account):
-        pass
+        account = client.get_account()
+        btc_balance = client.get_asset_balance("BTC")
+        eth_balance = client.get_asset_balance("ETH")
+        acc_status = client.get_account_status()
+        status_data = pd.DataFrame(acc_status)
+        status_data.head()
+        #safe it to csv file
+        with open("data.csv" , newline='') as file:
+            write = csv.writer(file , acc_status=acc_status)
+            write .writerow()
+            write.writerows(acc_status)
+        for keys , values in acc_status.items():
+            print(f"{keys} : {values} ")
     def transaction_history(self):
-        pass
+        deposits = client.get_deposit_history()
+        withdraws = client.get_withdraw_history()
+        for coin in coins:
+            trans_address = client.get_asset_balance(coin)
+            if trans_address is None:
+                print("you have no balance in the aforementioned coin")
+                raise BinanceOrderException
+                pass
+            else:
+                print(trans_address)
+
+if __name__ == '__main__':
+    binance = Binance_Account()
+    binance.account_info()
+    binance.transaction_history()
