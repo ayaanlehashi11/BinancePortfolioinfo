@@ -10,8 +10,8 @@ client = Client(api_key , api_secret)
 coins  = ["BTC" , "ETH" , "BNB" , "DOG" ,"SOL" , "XRP"]
 class Binance_Account:
     def __init__(self):
-        self.account = "ayaanle"
-        self.balance = client.get_asset_balance()
+        """
+        """
         pass
     # account: should your verified binance accound
     def account_info(self , account):
