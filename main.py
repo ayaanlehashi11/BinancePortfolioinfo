@@ -8,8 +8,6 @@ api_key = os.environ['BINANCE_API_KEY_TEST']
 api_secret = os.environ['BINANCE_API_SECRET_TEST']
 client = Client(api_key , api_secret)
 coins  = ["BTC" , "ETH" , "BNB" , "DOG" ,"SOL" , "XRP"]
-keys = []
-values = []
 class Binance_Account:
     def __init__(self):
         self.account = "ayaanle"
