@@ -1,7 +1,6 @@
 import os.path
 import csv
 import pandas as pd
-from binance.exceptions import BinanceOrderException
 from binance import Client, ThreadedWebsocketManager, ThreadedDepthCacheManager
 
 api_key = os.environ['BINANCE_API_KEY_TEST']
@@ -13,6 +12,9 @@ class Binance_Account:
         """
         """
         pass
+    def __init__(self , account , balance):
+        self.account = account
+        self.balance = balance
     # account: should your verified binance accound
     def account_info(self , account):
         account = client.get_account()
@@ -35,7 +37,6 @@ class Binance_Account:
             trans_address = client.get_asset_balance(coin)
             if trans_address is None:
                 print("you have no balance in the aforementioned coin")
-                raise BinanceOrderException
                 pass
             else:
                 print(trans_address)
