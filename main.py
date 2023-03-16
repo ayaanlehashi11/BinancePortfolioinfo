@@ -1,7 +1,9 @@
+
 import os.path
 import csv
 import pandas as pd
 from binance import Client, ThreadedWebsocketManager, ThreadedDepthCacheManager
+import asyncio
 
 api_key = os.environ['BINANCE_API_KEY_TEST']
 api_secret = os.environ['BINANCE_API_SECRET_TEST']
@@ -40,8 +42,13 @@ class Binance_Account:
                 pass
             else:
                 print(trans_address)
-
-if __name__ == '__main__':
+async def main():
     binance = Binance_Account()
     binance.account_info()
     binance.transaction_history()
+if __name__ == '__main__':
+    loop = asyncio.get_event_loop()
+    if not loop.is_closed():
+        loop.run_until_complete(main())
+    else:
+        pass
