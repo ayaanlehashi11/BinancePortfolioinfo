@@ -2,7 +2,7 @@
 import os.path
 import csv
 import pandas as pd
-from binance import Client, ThreadedWebsocketManager, ThreadedDepthCacheManager
+from binance import Client
 import asyncio
 
 api_key = os.environ['BINANCE_API_KEY_TEST']
