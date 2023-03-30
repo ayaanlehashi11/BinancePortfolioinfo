@@ -1,9 +1,8 @@
 
-import os.path
 import csv
+import os.path
 import pandas as pd
 from binance import Client
-import asyncio
 
 api_key = os.environ['BINANCE_API_KEY_TEST']
 api_secret = os.environ['BINANCE_API_SECRET_TEST']
