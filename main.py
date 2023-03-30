@@ -42,13 +42,9 @@ class Binance_Account:
                 pass
             else:
                 print(trans_address)
-async def main():
+def main():
     binance = Binance_Account()
     binance.account_info()
     binance.transaction_history()
 if __name__ == '__main__':
-    loop = asyncio.get_event_loop()
-    if not loop.is_closed():
-        loop.run_until_complete(main())
-    else:
-        pass
+    main()
