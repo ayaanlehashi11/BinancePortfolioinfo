@@ -2,17 +2,17 @@
 import csv
 import os.path
 import pandas as pd
+from typing import List , Dict
 from binance import Client
-
 api_key = os.environ['BINANCE_API_KEY_TEST']
 api_secret = os.environ['BINANCE_API_SECRET_TEST']
 client = Client(api_key , api_secret)
+
+# coins list contains some of the well known crypto pairs
 coins  = ["BTC" , "ETH" , "BNB" , "DOG" ,"SOL" , "XRP"]
+pairs = ["BTCUSD" , "BNBUSD" , "ETHUSD" , "DOGBNB"]
 class Binance_Account:
-    def __init__(self):
-        """
-        """
-        pass
+
     def __init__(self , account , balance):
         self.account = account
         self.balance = balance
@@ -31,12 +31,18 @@ class Binance_Account:
             write.writerows(acc_status)
         for keys , values in acc_status.items():
             print(f"{keys} : {values} ")
+    def orders_info(self , pairs:List[str]) -> Dict:
+        for pair in pairs:
+            orders = client.get_all_orders(pair)
+            open = client.get_open_orders(pair)
+
     def transaction_history(self):
         deposits = client.get_deposit_history()
         withdraws = client.get_withdraw_history()
+
         for coin in coins:
             trans_address = client.get_asset_balance(coin)
-            if trans_address is None:
+            if trans_address is None or trans_address == 0:
                 print("you have no balance in the aforementioned coin")
                 pass
             else:
