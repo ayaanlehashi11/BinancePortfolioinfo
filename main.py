@@ -47,6 +47,8 @@ class Binance_Account:
                 pass
             else:
                 print(trans_address)
+    def getKline():
+        pass
 def main():
     binance = Binance_Account()
     binance.account_info()
