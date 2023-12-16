@@ -47,7 +47,7 @@ class Binance_Account:
                 pass
             else:
                 print(trans_address)
-    def getKline(pair:List):
+    def getKline(self , pair:List):
         klines = get_historical_klines(pain , Client.KLINE_INTERVAL_30MINUTE, "1 Dec, 2017", "1 Jan, 2018")
         for kline in client.get_historical_klines_generator("BNBBTC", Client.KLINE_INTERVAL_1MINUTE, "1 Dec, 2017", "1 Jan, 2018"):
             print(kline)
